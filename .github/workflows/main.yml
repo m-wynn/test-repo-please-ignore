@@ -1,0 +1,28 @@
+---
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: tag it up
+        uses: hole19/git-tag-action@master
+        env:
+          tag: $(date '+%y%m%d.%h%m.%s')
+          github_token: ${{ secrets.github_token }}
+
+  deploy:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Deploy to production
+        run: echo DEPLOYING "${tag}" TO PRODUCTION AAAAAAHHHH
+        env:
+          tag: ${GITHUB_REF##*/}
