@@ -13,8 +13,8 @@ jobs:
       - name: tag it up
         uses: hole19/git-tag-action@master
         env:
-          tag: $(date '+%y%m%d.%h%m.%s')
-          github_token: ${{ secrets.github_token }}
+          TAG: $(date '+%y%m%d.%h%m.%s')
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
 
   deploy:
 
