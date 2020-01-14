@@ -1,17 +1,20 @@
 ---
-name: CI
+name: Tagger
 
-on: [push]
+on:
+  push:
+    branches:
+      - master
+    tags-ignore:
+      - v*
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v1
       - name: Get the Date
-        run: echo "::set-env name=TAG::$(date '+%Y%m%d.%H%M.%S')"
+        run: echo "::set-env name=TAG::v$(date '+%Y%m%d.%H%M.%S')"
       - name: tag it up
         uses: hole19/git-tag-action@master
         env:
@@ -19,9 +22,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
 
   deploy:
-
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v1
       - name: Deploy to production
