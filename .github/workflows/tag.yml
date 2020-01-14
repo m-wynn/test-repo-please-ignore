@@ -9,7 +9,7 @@ on:
       - v*
 
 jobs:
-  build:
+  tag:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -20,12 +20,3 @@ jobs:
         env:
           TAG: ${{ env.TAG }}
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
-
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - name: Deploy to production
-        run: echo DEPLOYING "${tag}" TO PRODUCTION AAAAAAHHHH
-        env:
-          tag: ${GITHUB_REF##*/}
