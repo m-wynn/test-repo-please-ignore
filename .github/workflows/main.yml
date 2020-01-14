@@ -11,11 +11,11 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Get the Date
-        run: echo "::set-env name=tag::$(date '+%Y%m%d.%H%M.%S')"
+        run: echo "::set-env name=TAG::$(date '+%Y%m%d.%H%M.%S')"
       - name: tag it up
         uses: hole19/git-tag-action@master
         env:
-          TAG: ${{ tag }}
+          TAG: ${{ env.TAG }}
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
 
   deploy:
